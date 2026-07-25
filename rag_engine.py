@@ -1,5 +1,5 @@
 """
-CORE RAG mechanism Docstring:
+RAG Mechanism:
 The Retrieval-Augmented Generation core for the GBU Grievance Assistant.
 
 RETRIEVAL:
@@ -32,7 +32,6 @@ import os
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
 KB_PATH = os.path.join(os.path.dirname(__file__), "data", "knowledge_base.json")
 
 SIMILARITY_THRESHOLD = 0.12
@@ -40,12 +39,16 @@ SIMILARITY_THRESHOLD = 0.12
 GROQ_MODEL = "llama-3.3-70b-versatile"
 
 SYSTEM_PROMPT = """You are the GBU Grievance Assistant, a helpful, concise assistant for
-Gautam Buddha University's Grievance Management System. Answer only using the
-CONTEXT provided below. If the context does not contain the answer, say you
-don't know and suggest contacting the IT Cell / Grievance Redressal Committee.
-Never invent policy, timelines, or procedures that are not in the context. You can use internet data to answer questions about GAUTAM BUDDHA UNIVERSITY, Greater Noida.
-Keep answers under 4 sentences unless the user asks for detail. Do not repeat
-the user's question back to them."""
+Gautam Buddha University's Grievance Management System. Prefer the CONTEXT
+provided below for anything related to grievance policy, categories, timelines,
+or procedures -- never invent policy, timelines, or procedures that are not in
+the context. If the CONTEXT is empty or doesn't cover the question, you may
+answer general questions about Gautam Buddha University (GBU), Greater Noida
+using your own knowledge, but stay factual and say you're not sure rather than
+guessing. For anything unrelated to GBU or grievances, say it's outside what
+you can help with and suggest contacting the IT Cell / Grievance Redressal
+Committee. Keep answers under 4 sentences unless the user asks for detail.
+Do not repeat the user's question back to them."""
 
 def _groq_client():
     api_key = os.getenv("GROQ_API_KEY")
@@ -65,6 +68,7 @@ def call_llm(query: str, retrieved: list):
     context = "\n\n".join(
         f"[{i+1}] ({r['category']}) {r['answer']}" for i, r in enumerate(retrieved)
     )
+
     try:
         completion = client.chat.completions.create(
             model=GROQ_MODEL,
@@ -113,25 +117,21 @@ class Retriever:
         return results
 
 def generate_answer(query: str, retrieved: list) -> dict:
-    if not retrieved:
-        return {
-            "answer": (
-                "I couldn't find a confident answer to that in the grievance "
-                "knowledge base. You can rephrase your question, or contact "
-                "the IT Cell / Grievance Redressal Committee directly for help."
-            ),
-            "sources": [],
-        }
-
-    best = retrieved[0]
     llm_answer = call_llm(query, retrieved) if USE_LLM else None
 
     if llm_answer:
         answer = llm_answer
-    else:
+    elif retrieved:
+        best = retrieved[0]
         answer = best["answer"]
         if len(retrieved) > 1 and retrieved[1]["score"] >= SIMILARITY_THRESHOLD:
             answer += f"\n\nRelated: {retrieved[1]['answer']}"
+    else:
+        answer = (
+            "I couldn't find a confident answer to that in the grievance "
+            "knowledge base. You can rephrase your question, or contact "
+            "the IT Cell / Grievance Redressal Committee directly for help."
+        )
 
     return {
         "answer": answer,
