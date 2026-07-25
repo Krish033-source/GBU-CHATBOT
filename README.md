@@ -6,6 +6,8 @@
 
 ---
 
+** 🔗Live Link:** https://gbu-chatbot.onrender.com/
+
 ## 1. Objective
 
 An AI-powered assistant embedded in the GBU Grievance Management & Ticket Tracking
