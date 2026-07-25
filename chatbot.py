@@ -46,6 +46,8 @@ def detect_intent(message: str, state: dict) -> str:
         return "greeting"
     if text in GOODBYES:
         return "goodbye"
+    if any(t in text for t in IDENTITY_TRIGGERS):
+        return "identity"
 
     has_ticket_id = bool(extract_ticket_id(message))
     is_question = bool(QUESTION_PATTERN.match(text))
@@ -75,6 +77,17 @@ def handle_message(session_id: str, message: str) -> dict:
         reset_state(session_id)
         return _reply("You're welcome! Feel free to come back anytime you need help "
                        "with a grievance. Take care.")
+
+    if intent == "identity":
+        return _reply(
+            "I'm the GBU Grievance Assistant — a chatbot built for Gautam Buddha "
+            "University's IT Cell. I help students submit grievances, track existing "
+            "tickets by ID, and answer questions about the grievance process. My "
+            "answers to policy questions are grounded in the official knowledge base "
+            "(a retrieval-augmented (RAG) pipeline), so I won't make up rules that aren't "
+            "actually there. What would you like to do?",
+            quick_replies=["Submit a new grievance", "Track my ticket", "What categories are there?"],
+        )
 
     if intent == "track_status":
         return _handle_track(message)
