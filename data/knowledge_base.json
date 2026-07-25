@@ -103,5 +103,271 @@
     "question": "I was charged incorrectly, how do I raise a fee grievance?",
     "answer": "File a grievance under the 'Fee' category with your transaction ID, amount, and date of payment. The finance office typically reviews fee-related grievances within 5 working days and refunds are processed after verification.",
     "keywords": ["fee issue", "wrong charge", "refund", "payment problem", "double payment"]
+  },
+  {
+    "id": "kb016",
+    "category": "Getting Started",
+    "question": "Can I file a grievance anonymously?",
+    "answer": "Standard grievances require you to be logged in for accountability and follow-up, but sensitive complaints such as harassment or ragging can be filed with restricted visibility so only the designated committee sees your identity, not the general admin queue. Ask the assistant to route your complaint as 'sensitive' if you need this.",
+    "keywords": ["anonymous", "hide identity", "confidential complaint", "without name"]
+  },
+  {
+    "id": "kb017",
+    "category": "Getting Started",
+    "question": "Can I file more than one grievance at a time?",
+    "answer": "Yes, there's no limit on the number of open grievances you can have. Each one gets its own unique Ticket ID and is tracked independently, so unrelated issues should always be filed as separate grievances rather than combined into one.",
+    "keywords": ["multiple grievances", "more than one", "several complaints", "separate tickets"]
+  },
+  {
+    "id": "kb018",
+    "category": "Getting Started",
+    "question": "Can I attach documents or screenshots to my grievance?",
+    "answer": "Yes, on the full grievance form (portal homepage) you can attach supporting documents such as fee receipts, screenshots, or medical certificates up to 10 MB per file. The chat-based quick submission currently supports text only — for evidence-heavy complaints, use the portal form instead.",
+    "keywords": ["attach", "upload", "screenshot", "document", "evidence", "proof"]
+  },
+  {
+    "id": "kb019",
+    "category": "Ticket ID",
+    "question": "I lost my Ticket ID, how do I find it?",
+    "answer": "Check the confirmation email sent to your registered GBU email address at the time of submission — the Ticket ID is included there. If you can't locate the email, contact the IT Cell helpdesk with your name and roll number and they can look it up for you.",
+    "keywords": ["lost ticket id", "forgot ticket id", "find my ticket", "misplaced id"]
+  },
+  {
+    "id": "kb020",
+    "category": "Tracking",
+    "question": "Can I check the status of someone else's grievance?",
+    "answer": "No. For privacy reasons, grievance status can only be checked using the Ticket ID together with your logged-in account matching the original submitter. If you're a parent or guardian following up, the student should share updates directly or authorize the IT Cell to disclose them.",
+    "keywords": ["check someone else's ticket", "another student", "on behalf of", "parent tracking"]
+  },
+  {
+    "id": "kb021",
+    "category": "Timelines",
+    "question": "What counts as a working day for resolution timelines?",
+    "answer": "Working days are Monday through Saturday, excluding declared university holidays and Sundays. A grievance filed on a Friday evening, for example, is typically acknowledged by the following Monday, and the 7-working-day resolution clock starts once it's officially assigned.",
+    "keywords": ["working days", "business days", "holiday", "weekend", "sla clock"]
+  },
+  {
+    "id": "kb022",
+    "category": "Timelines",
+    "question": "Do all grievance categories have the same resolution timeline?",
+    "answer": "No. Fee grievances are typically resolved within 5 working days, Hostel and Infrastructure issues within 3-7 days depending on whether physical inspection is needed, IT/Portal bugs within 2-4 days, while Academic and Examination grievances can take 10-15 days since they often require committee or faculty review.",
+    "keywords": ["different timelines", "per category time", "academic vs fee time", "examination delay"]
+  },
+  {
+    "id": "kb023",
+    "category": "Notifications",
+    "question": "I'm not receiving email notifications, what should I do?",
+    "answer": "First check your spam/junk folder, since university-domain emails are sometimes filtered. Confirm the email address on your grievance matches your active inbox. If notifications still don't arrive after 24 hours, report it as an 'IT/Portal' grievance so the team can check the mail delivery logs.",
+    "keywords": ["not getting emails", "no notification", "email not received", "spam folder"]
+  },
+  {
+    "id": "kb024",
+    "category": "Academic",
+    "question": "How do I raise a grievance about unfair grading?",
+    "answer": "File a grievance under the 'Academic' category, mentioning the course code, faculty name, and the specific assessment you're disputing. Grading disputes are reviewed by the Academic Grievance Sub-Committee, which may request the answer script or assignment for evaluation before a decision.",
+    "keywords": ["unfair grading", "grade dispute", "marks issue", "faculty grading complaint"]
+  },
+  {
+    "id": "kb025",
+    "category": "Academic",
+    "question": "Can I complain about a faculty member's conduct?",
+    "answer": "Yes, conduct-related complaints against faculty are filed under 'Academic' and are automatically treated as sensitive, meaning they're routed to a restricted queue visible only to the Dean of Academic Affairs and the Grievance Redressal Committee chair, not general department staff.",
+    "keywords": ["faculty conduct", "professor complaint", "teacher behavior", "misconduct"]
+  },
+  {
+    "id": "kb026",
+    "category": "Academic",
+    "question": "What if my attendance shortage was due to a genuine reason?",
+    "answer": "File an 'Academic' grievance explaining the reason (medical, family emergency, official university representation, etc.) along with supporting documents attached via the portal form. Condonation requests are reviewed by the department's academic committee, typically within 10 working days.",
+    "keywords": ["attendance shortage", "condonation", "detained", "medical leave attendance"]
+  },
+  {
+    "id": "kb027",
+    "category": "Examination",
+    "question": "How do I request revaluation of my exam paper?",
+    "answer": "File a grievance under 'Examination', mentioning the subject code, exam date, and roll number. Revaluation requests must typically be raised within 7 days of result declaration and carry a nominal fee handled separately through the Fee category if a change in marks is not granted.",
+    "keywords": ["revaluation", "recheck", "re-evaluate", "paper checking again"]
+  },
+  {
+    "id": "kb028",
+    "category": "Examination",
+    "question": "My exam result hasn't been declared yet, what do I do?",
+    "answer": "Result delays are usually posted as announcements on the university portal first. If your result is missing well past the announced date while others in your batch have theirs, file an 'Examination' grievance with your roll number and subject codes so the Examination Cell can investigate.",
+    "keywords": ["result delayed", "result not out", "missing marks", "result not declared"]
+  },
+  {
+    "id": "kb029",
+    "category": "Examination",
+    "question": "I missed my exam due to a medical emergency, what are my options?",
+    "answer": "File an 'Examination' grievance immediately, ideally within 3 days of the missed exam, and attach medical proof via the portal form. The Examination Committee decides whether you're eligible for a special/supplementary exam on a case-by-case basis.",
+    "keywords": ["missed exam", "medical emergency exam", "supplementary exam", "special exam"]
+  },
+  {
+    "id": "kb030",
+    "category": "Hostel",
+    "question": "How do I complain about hostel room allotment?",
+    "answer": "File a 'Hostel' category grievance mentioning your current room number, hostel block, and the specific issue (overcrowding, maintenance, roommate conflict, etc.). Room reallotment requests are reviewed by the Chief Warden and typically processed within a week, subject to availability.",
+    "keywords": ["room allotment", "hostel room", "roommate issue", "room change"]
+  },
+  {
+    "id": "kb031",
+    "category": "Hostel",
+    "question": "How do I report a mess food quality issue?",
+    "answer": "File a 'Hostel' grievance describing the specific issue (hygiene, quality, menu deviation, timing) with the date it occurred. Recurring mess complaints are also reviewed collectively at the monthly Mess Committee meeting, so repeated reports on the same issue help build the case.",
+    "keywords": ["mess food", "food quality", "hostel food complaint", "canteen issue"]
+  },
+  {
+    "id": "kb032",
+    "category": "Hostel",
+    "question": "Who do I contact about hostel maintenance issues like broken furniture or plumbing?",
+    "answer": "File a 'Hostel' grievance with your room/block number and a description of the maintenance issue. These are routed directly to the hostel maintenance team and are usually the fastest category to resolve, often within 2-3 working days for straightforward repairs.",
+    "keywords": ["maintenance", "broken furniture", "plumbing", "electricity issue hostel", "repair"]
+  },
+  {
+    "id": "kb033",
+    "category": "Infrastructure",
+    "question": "How do I report a problem with campus WiFi or internet?",
+    "answer": "File an 'Infrastructure' or 'IT/Portal' grievance mentioning the specific building/block and the nature of the issue (no connectivity, slow speed, frequent disconnects). The Network team typically resolves connectivity issues within 2-3 working days.",
+    "keywords": ["wifi not working", "internet issue", "network problem", "connectivity"]
+  },
+  {
+    "id": "kb034",
+    "category": "Infrastructure",
+    "question": "How do I complain about classroom or lab equipment?",
+    "answer": "File an 'Infrastructure' grievance specifying the room number, building, and equipment concerned (projector, AC, lab instruments, seating, etc.). These are routed to campus facilities management and prioritized based on whether the issue is actively disrupting classes.",
+    "keywords": ["classroom equipment", "lab equipment", "projector not working", "ac issue", "furniture"]
+  },
+  {
+    "id": "kb035",
+    "category": "Infrastructure",
+    "question": "How do I report a safety hazard on campus?",
+    "answer": "Safety hazards (broken flooring, exposed wiring, poor lighting in walkways, etc.) should be filed as 'Infrastructure' grievances marked urgent, and are escalated immediately to campus security and facilities. For anything posing immediate danger, also contact campus security directly rather than waiting for the grievance workflow.",
+    "keywords": ["safety hazard", "dangerous", "exposed wiring", "unsafe campus", "accident risk"]
+  },
+  {
+    "id": "kb036",
+    "category": "IT/Portal",
+    "question": "I can't log in to the grievance portal, what should I do?",
+    "answer": "First try resetting your password using the 'Forgot Password' link with your registered GBU email. If that doesn't work, it may be an account sync issue between the university ERP and the grievance portal — in that case, message the assistant here with your roll number so we can log it as an IT/Portal issue for the tech team.",
+    "keywords": ["can't login", "login failed", "password reset", "account locked"]
+  },
+  {
+    "id": "kb037",
+    "category": "IT/Portal",
+    "question": "How do I report a bug or glitch I found on the university website?",
+    "answer": "File an 'IT/Portal' grievance describing the exact page/URL, what you did, and what went wrong (a screenshot helps a lot — attach it via the portal form). The IT Cell development team reviews and prioritizes bugs based on how many users are affected.",
+    "keywords": ["website bug", "glitch", "portal error", "broken page", "report a bug"]
+  },
+  {
+    "id": "kb038",
+    "category": "Escalation",
+    "question": "How do I formally escalate a grievance to higher authorities?",
+    "answer": "Mention your Ticket ID here and say you'd like to escalate — this flags it for review by the Grievance Redressal Committee chair rather than the department officer originally assigned. Escalation is intended for cases that are significantly overdue or where you're unsatisfied with the resolution offered, not as a first step.",
+    "keywords": ["formal escalation", "higher authority", "committee review", "senior administration"]
+  },
+  {
+    "id": "kb039",
+    "category": "Escalation",
+    "question": "I'm not satisfied with how my grievance was resolved, can I appeal?",
+    "answer": "Yes. Reply with your Ticket ID and mention you'd like to appeal the resolution within 7 days of the ticket being marked Resolved. The Grievance Redressal Committee will review the original decision and may reopen the case if new information is presented.",
+    "keywords": ["appeal", "not satisfied", "reopen grievance", "disagree with resolution"]
+  },
+  {
+    "id": "kb040",
+    "category": "Privacy",
+    "question": "How long is my grievance data stored?",
+    "answer": "Grievance records, including your submitted details and correspondence, are retained for the duration of your enrollment at GBU plus 3 years for audit and compliance purposes, after which they are archived or securely deleted as per university data retention policy.",
+    "keywords": ["data retention", "how long stored", "data deletion", "record keeping"]
+  },
+  {
+    "id": "kb041",
+    "category": "Privacy",
+    "question": "Who has access to my grievance details?",
+    "answer": "Only the department officer assigned to your case and the Grievance Redressal Committee (for escalations) can view your grievance details. Sensitive categories such as harassment complaints are further restricted to a small designated panel, and access is logged for accountability.",
+    "keywords": ["who can view", "access control", "staff visibility", "who sees my complaint"]
+  },
+  {
+    "id": "kb042",
+    "category": "Sensitive Issues",
+    "question": "How do I report harassment or ragging?",
+    "answer": "Harassment and ragging complaints can be filed here under the appropriate category and are automatically flagged as sensitive, routing them directly to the Anti-Ragging Committee or Internal Complaints Committee rather than the general grievance queue. For anything involving immediate safety risk, also contact campus security or the university helpline directly rather than waiting on the grievance workflow.",
+    "keywords": ["harassment", "ragging", "anti-ragging", "internal complaints committee", "safety complaint"]
+  },
+  {
+    "id": "kb043",
+    "category": "Account",
+    "question": "I'm a new student and don't have portal credentials yet, how do I file a grievance?",
+    "answer": "New students receive their GBU login credentials during orientation/registration. If you haven't received yours yet, you can still describe your issue here in the chat and the assistant will guide you to the IT Cell to get provisional access so your grievance can be formally logged against your record.",
+    "keywords": ["new student", "no credentials", "no login yet", "orientation account"]
+  },
+  {
+    "id": "kb044",
+    "category": "Account",
+    "question": "Can faculty or staff also file grievances through this system?",
+    "answer": "This chatbot and portal are primarily configured for student grievances. Faculty and staff grievances are handled through a separate HR/Establishment grievance channel — if you're staff, please contact the HR department directly rather than filing here.",
+    "keywords": ["faculty grievance", "staff complaint", "employee grievance", "hr channel"]
+  },
+  {
+    "id": "kb045",
+    "category": "Account",
+    "question": "Can alumni or former students file a grievance?",
+    "answer": "Alumni can file grievances related to matters that arose during their enrollment (e.g., degree certificate errors, transcript issues) but should use their alumni-registered email since student portal credentials are deactivated after graduation. Mention 'alumni' in your description so it's routed correctly.",
+    "keywords": ["alumni", "former student", "graduated", "ex-student complaint"]
+  },
+  {
+    "id": "kb046",
+    "category": "Fee",
+    "question": "How do I request a fee refund after withdrawing from a course?",
+    "answer": "File a 'Fee' category grievance mentioning the course/program withdrawn from, the amount paid, and your transaction reference. Refunds are processed as per the university's refund policy schedule, which varies depending on how many days before the semester start you withdrew.",
+    "keywords": ["fee refund", "withdrawal refund", "course drop refund", "refund policy"]
+  },
+  {
+    "id": "kb047",
+    "category": "Fee",
+    "question": "My scholarship or fee waiver wasn't applied correctly, what do I do?",
+    "answer": "File a 'Fee' grievance with your scholarship reference number/order and the discrepancy in the amount charged. These are reviewed jointly by the Finance Office and the Scholarship Cell, typically within 7-10 working days since it may require cross-checking with the scholarship provider.",
+    "keywords": ["scholarship not applied", "fee waiver issue", "wrong fee charged", "scholarship discrepancy"]
+  },
+  {
+    "id": "kb048",
+    "category": "Support",
+    "question": "What are the IT Cell's working hours?",
+    "answer": "The IT Cell helpdesk is available Monday to Saturday, 9:30 AM to 5:30 PM, excluding university holidays. Grievances can be filed through this chatbot and the portal 24/7 — they'll simply be picked up for processing on the next working day if submitted outside these hours.",
+    "keywords": ["working hours", "office timing", "helpdesk hours", "available when"]
+  },
+  {
+    "id": "kb049",
+    "category": "Support",
+    "question": "Is support available in Hindi as well as English?",
+    "answer": "This chatbot currently responds in English, but you're welcome to describe your issue in Hindi or a mix of both and the assistant will do its best to understand it. For formal grievance records, however, please provide the final description in English so it's clearly understood by the reviewing department.",
+    "keywords": ["hindi support", "language", "regional language", "hinglish"]
+  },
+  {
+    "id": "kb050",
+    "category": "About This Assistant",
+    "question": "What can this chatbot actually do?",
+    "answer": "I can help you submit a new grievance, track an existing one by Ticket ID, answer questions about the grievance process using the official knowledge base, and guide you on escalation or appeal steps. For anything requiring a human decision — like actually resolving your case — it's handled by the relevant department officer, not by me.",
+    "keywords": ["what can you do", "capabilities", "chatbot features", "how does this help"]
+  },
+  {
+    "id": "kb051",
+    "category": "About This Assistant",
+    "question": "Are your answers always accurate?",
+    "answer": "I answer policy and process questions using a retrieval-augmented system grounded in the official GBU grievance knowledge base, so I won't invent rules that don't exist. That said, for legally binding or highly specific edge cases, I'll point you to the IT Cell or Grievance Redressal Committee to confirm directly.",
+    "keywords": ["accurate", "reliable", "trust", "correct information", "official source"]
+  },
+  {
+    "id": "kb052",
+    "category": "Feedback",
+    "question": "Can I give feedback on how my grievance was handled?",
+    "answer": "Yes, once your ticket is marked Resolved, the confirmation email includes a short feedback link where you can rate the resolution and add comments. This feedback is reviewed periodically by the Grievance Redressal Committee to improve response quality across departments.",
+    "keywords": ["feedback", "rate resolution", "satisfaction survey", "review handling"]
+  },
+  {
+    "id": "kb053",
+    "category": "Mobile Access",
+    "question": "Can I use the grievance system from my phone?",
+    "answer": "Yes, both the chat assistant and the grievance portal are mobile-responsive and work in any modern mobile browser — there's no separate app required. You can submit, track, and receive email notifications about your grievance entirely from your phone.",
+    "keywords": ["mobile", "phone access", "app", "responsive", "use on mobile"]
   }
 ]
