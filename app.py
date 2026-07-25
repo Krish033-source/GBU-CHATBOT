@@ -14,6 +14,9 @@ Routes:
 
 import os
 import uuid
+
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, request, jsonify, render_template, session
 
 import chatbot
