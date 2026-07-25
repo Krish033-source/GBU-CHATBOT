@@ -1,0 +1,188 @@
+"""
+rag_engine.py
+--------------
+The Retrieval-Augmented Generation core for the GBU Grievance Assistant.
+
+RETRIEVAL:
+    Knowledge base entries (question + answer + keywords) are vectorized with
+    TF-IDF. A user query is vectorized with the same fitted vectorizer and
+    compared against every KB entry using cosine similarity. The top-k most
+    relevant entries are returned as "retrieved context".
+
+    TF-IDF is used instead of a hosted embeddings API because it runs fully
+    offline, is deterministic, and is easy to explain/defend in a screening
+    interview -- important qualities for a transparent grievance system.
+    The retriever is written as its own class (`Retriever`) so it can be
+    swapped for a sentence-embedding model (e.g. `all-MiniLM-L6-v2` via
+    sentence-transformers) later without touching the rest of the app.
+
+GENERATION:
+    `generate_answer()` implements the "G" in RAG: it takes the retrieved
+    KB entries and synthesizes a single grounded response, citing which
+    KB category it drew from. This keeps answers verifiable -- the bot
+    never invents policy that isn't in the knowledge base.
+
+    A `USE_LLM` flag shows where this would be swapped for a call to an LLM
+    (e.g. the Anthropic API) that receives the retrieved passages as context
+    and produces a more natural free-form answer. That path is documented in
+    README.md; the offline template-based generator below is the default so
+    the prototype runs without any API key or internet access.
+"""
+
+import json
+import os
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+KB_PATH = os.path.join(os.path.dirname(__file__), "data", "knowledge_base.json")
+
+# Confidence threshold below which we admit we don't know the answer
+# instead of forcing a bad match. This is the single most important
+# anti-hallucination guard in the pipeline.
+SIMILARITY_THRESHOLD = 0.12
+
+GROQ_MODEL = "llama-3.3-70b-versatile"
+
+SYSTEM_PROMPT = """You are the GBU Grievance Assistant, a helpful, concise assistant for
+Gautam Buddha University's Grievance Management System. Answer only using the
+CONTEXT provided below. If the context does not contain the answer, say you
+don't know and suggest contacting the IT Cell / Grievance Redressal Committee.
+Never invent policy, timelines, or procedures that are not in the context.
+Keep answers under 4 sentences unless the user asks for detail. Do not repeat
+the user's question back to them."""
+
+
+def _groq_client():
+    """
+    Lazily creates a Groq client only if GROQ_API_KEY is set. Import is done
+    inside the function so the whole app still runs (falling back to the
+    offline template generator) on a machine that hasn't `pip install groq`-ed.
+    """
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        return None
+    try:
+        from groq import Groq
+        return Groq(api_key=api_key)
+    except ImportError:
+        return None
+
+
+def call_llm(query: str, retrieved: list):
+    """
+    Sends the retrieved KB passages as grounding context to Groq's chat
+    completions endpoint (Llama 3.3 70B). Returns None on any failure so the
+    caller can fall back to the offline template generator -- the chatbot
+    must never go down just because the LLM call failed or timed out.
+    """
+    client = _groq_client()
+    if client is None:
+        return None
+
+    context = "\n\n".join(
+        f"[{i+1}] ({r['category']}) {r['answer']}" for i, r in enumerate(retrieved)
+    )
+
+    try:
+        completion = client.chat.completions.create(
+            model=GROQ_MODEL,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": f"CONTEXT:\n{context}\n\nUSER QUESTION:\n{query}"},
+            ],
+            temperature=0.3,
+            max_tokens=250,
+        )
+        return completion.choices[0].message.content.strip()
+    except Exception:
+        # Network hiccup, rate limit, bad key, etc. -- degrade gracefully.
+        return None
+
+
+# Generation mode is decided automatically at runtime: if GROQ_API_KEY is
+# present the bot uses the real LLM for more natural phrasing; otherwise it
+# falls back to the deterministic template generator below. This means the
+# exact same code runs fine for local/offline testing AND in the deployed
+# version with a key configured -- no code change needed either way.
+USE_LLM = os.environ.get("GROQ_API_KEY") is not None
+
+
+class Retriever:
+    def __init__(self, kb_path: str = KB_PATH):
+        with open(kb_path, "r", encoding="utf-8") as f:
+            self.kb = json.load(f)
+
+        # Build the corpus each document is indexed on: question + keywords
+        # weighted more heavily than the answer, since users phrase queries
+        # like questions/keywords, not like answers.
+        self.corpus = [
+            (entry["question"] + " ") * 3
+            + " ".join(entry["keywords"]) * 2
+            + " " + entry["answer"]
+            for entry in self.kb
+        ]
+
+        self.vectorizer = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
+        self.doc_matrix = self.vectorizer.fit_transform(self.corpus)
+
+    def retrieve(self, query: str, top_k: int = 3):
+        query_vec = self.vectorizer.transform([query])
+        scores = cosine_similarity(query_vec, self.doc_matrix).flatten()
+
+        ranked = sorted(
+            zip(range(len(self.kb)), scores), key=lambda x: x[1], reverse=True
+        )
+
+        results = []
+        for idx, score in ranked[:top_k]:
+            if score >= SIMILARITY_THRESHOLD:
+                entry = dict(self.kb[idx])
+                entry["score"] = round(float(score), 3)
+                results.append(entry)
+        return results
+
+
+def generate_answer(query: str, retrieved: list) -> dict:
+    """
+    The 'G' step: synthesize a grounded response from retrieved KB entries.
+    Returns a dict with the answer text and the source entries used, so the
+    frontend can show a "based on: <category>" citation -- this transparency
+    is what makes it a *RAG* answer rather than a black-box chatbot reply.
+    """
+    if not retrieved:
+        return {
+            "answer": (
+                "I couldn't find a confident answer to that in the grievance "
+                "knowledge base. You can rephrase your question, or contact "
+                "the IT Cell / Grievance Redressal Committee directly for help."
+            ),
+            "sources": [],
+        }
+
+    best = retrieved[0]
+    llm_answer = call_llm(query, retrieved) if USE_LLM else None
+
+    if llm_answer:
+        answer = llm_answer
+    else:
+        # Offline fallback: either GROQ_API_KEY isn't set, or the API call
+        # failed (network/rate-limit/bad key) -- either way the bot still
+        # answers, just less fluently.
+        answer = best["answer"]
+        if len(retrieved) > 1 and retrieved[1]["score"] >= SIMILARITY_THRESHOLD:
+            answer += f"\n\nRelated: {retrieved[1]['answer']}"
+
+    return {
+        "answer": answer,
+        "sources": [{"category": r["category"], "question": r["question"], "score": r["score"]} for r in retrieved],
+        "mode": "llm" if llm_answer else "template",
+    }
+
+
+TICKET_ID_PATTERN = re.compile(r"GBU-\d{4}-\d{4,6}", re.IGNORECASE)
+
+
+def extract_ticket_id(text: str):
+    match = TICKET_ID_PATTERN.search(text)
+    return match.group(0).upper() if match else None

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBU Grievance Assistant</title>
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Left info panel -->
+  <aside class="panel">
+    <div class="brand">
+      <img class="brand-mark" src="{{ url_for('static', filename='logo.svg') }}" alt="GBU logo" width="42" height="42">
+      <div>
+        <div class="brand-title">Grievance Assistant</div>
+        <div class="brand-sub">Gautam Buddha University · IT Cell</div>
+      </div>
+    </div>
+
+    <p class="panel-lede">Submit a grievance, track its status, or ask a question &mdash; all in one conversation.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-index">01</span>
+        <div>
+          <div class="step-title">Describe your issue</div>
+          <div class="step-body">Tell the assistant what happened and pick a category.</div>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-index">02</span>
+        <div>
+          <div class="step-title">Get a Ticket ID</div>
+          <div class="step-body">A unique ID is issued instantly and emailed to you.</div>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-index">03</span>
+        <div>
+          <div class="step-title">Track anytime</div>
+          <div class="step-body">Paste your Ticket ID here to check Pending / In&nbsp;Progress / Resolved.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <button class="qa-btn" data-msg="I want to submit a grievance">New grievance</button>
+      <button class="qa-btn" data-msg="I want to track my ticket">Track ticket</button>
+      <button class="qa-btn" data-msg="What categories of grievances can I file?">Categories</button>
+      <button class="qa-btn" data-msg="How long does it take to resolve a grievance?">Resolution time</button>
+    </div>
+
+    <a class="admin-link" href="{{ url_for('admin') }}">Admin dashboard &rarr;</a>
+
+    <div class="panel-footer">
+      Powered by a retrieval-augmented (RAG) knowledge base &mdash; answers are grounded in official grievance policy, not guessed.
+    </div>
+  </aside>
+
+  <!-- Chat -->
+  <main class="chat">
+    <header class="chat-header">
+      <div class="status-dot"></div>
+      <div>
+        <div class="chat-header-title">Assistant is online</div>
+        <div class="chat-header-sub">Typically replies instantly</div>
+      </div>
+    </header>
+
+    <div class="messages" id="messages"></div>
+
+    <div class="typing" id="typing" hidden>
+      <span></span><span></span><span></span>
+    </div>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <input type="text" id="input" placeholder="Type your message… e.g. GBU-2026-00123" />
+      <button type="submit" aria-label="Send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 11.5L21 3l-7.5 18-3-7.5L3 11.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+  </main>
+</div>
+
+<template id="ticket-stub-template">
+  <div class="ticket-stub">
+    <div class="ticket-stub-row">
+      <span class="ticket-stub-label">Ticket ID</span>
+      <span class="ticket-stub-id"></span>
+    </div>
+    <div class="ticket-stub-barcode"></div>
+  </div>
+</template>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

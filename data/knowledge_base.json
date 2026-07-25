@@ -1,0 +1,107 @@
+[
+  {
+    "id": "kb001",
+    "category": "Getting Started",
+    "question": "How do I submit a grievance?",
+    "answer": "You can submit a grievance directly here in the chat — just say 'submit a grievance' or 'I have a complaint' and I will walk you through it. Alternatively, you can use the 'New Grievance' form on the portal homepage. You'll need your name, GBU email/roll number, the grievance category, and a short description.",
+    "keywords": ["submit", "file", "raise", "complaint", "new grievance", "register"]
+  },
+  {
+    "id": "kb002",
+    "category": "Getting Started",
+    "question": "What information do I need to file a grievance?",
+    "answer": "You need your full name, GBU registered email or roll number, the department/category the issue relates to (Academic, Hostel, Examination, Fee, Infrastructure, or IT), and a clear description of the issue. Supporting documents can be attached on the portal form if needed.",
+    "keywords": ["information needed", "details required", "what do i need"]
+  },
+  {
+    "id": "kb003",
+    "category": "Ticket ID",
+    "question": "What is a Ticket ID and where do I get it?",
+    "answer": "A Ticket ID is a unique reference code (format: GBU-YYYY-NNNNN) generated automatically the moment your grievance is submitted. It is shown on screen immediately and also emailed to your registered address. Keep it safe — you'll need it to track your grievance status.",
+    "keywords": ["ticket id", "reference number", "unique id", "confirmation number"]
+  },
+  {
+    "id": "kb004",
+    "category": "Tracking",
+    "question": "How can I track the status of my grievance?",
+    "answer": "Enter your Ticket ID here in the chat (e.g., GBU-2026-00123) or use the 'Track Grievance' option on the portal. I'll show you the current status: Pending, In Progress, or Resolved, along with the last updated date.",
+    "keywords": ["track", "status", "check ticket", "where is my grievance", "progress"]
+  },
+  {
+    "id": "kb005",
+    "category": "Tracking",
+    "question": "What do the grievance statuses mean?",
+    "answer": "Pending means your grievance has been received but not yet assigned. In Progress means a department officer is actively working on it. Resolved means action has been taken and a resolution note has been added; you'll also receive an email confirming closure.",
+    "keywords": ["pending", "in progress", "resolved", "status meaning", "what does status mean"]
+  },
+  {
+    "id": "kb006",
+    "category": "Timelines",
+    "question": "How long does it take to resolve a grievance?",
+    "answer": "Most grievances are acknowledged within 24-48 hours and resolved within 7 working days, depending on complexity. Academic and examination-related grievances may take slightly longer due to committee review. You'll be notified by email at every stage.",
+    "keywords": ["how long", "resolution time", "turnaround", "sla", "how many days"]
+  },
+  {
+    "id": "kb007",
+    "category": "Notifications",
+    "question": "Will I get notified about updates to my grievance?",
+    "answer": "Yes. The system sends a mandatory email notification when your grievance is submitted and again whenever its status changes, so you always know where things stand without needing to check manually.",
+    "keywords": ["email notification", "will i be notified", "updates", "alerts"]
+  },
+  {
+    "id": "kb008",
+    "category": "Categories",
+    "question": "What categories of grievances can I file?",
+    "answer": "You can file grievances under six categories: Academic (courses, faculty, grades), Examination (results, revaluation), Hostel (accommodation, mess, maintenance), Fee (payments, refunds, dues), Infrastructure (labs, classrooms, campus facilities), and IT/Portal (login issues, website bugs).",
+    "keywords": ["categories", "types of grievance", "which category", "department"]
+  },
+  {
+    "id": "kb009",
+    "category": "Escalation",
+    "question": "What if my grievance is not resolved on time?",
+    "answer": "If your grievance stays Pending beyond the expected timeline, you can request an escalation here in the chat, or contact the IT Cell / Grievance Redressal Committee directly. Escalated tickets are flagged for priority review by senior administration.",
+    "keywords": ["escalate", "not resolved", "delay", "overdue", "no response"]
+  },
+  {
+    "id": "kb010",
+    "category": "Editing",
+    "question": "Can I edit or withdraw a grievance after submitting it?",
+    "answer": "Once submitted, the core details of a grievance cannot be edited to preserve record integrity, but you can add follow-up comments using your Ticket ID. To withdraw a grievance, mention your Ticket ID here and request withdrawal — this will be logged and reviewed by an admin.",
+    "keywords": ["edit", "withdraw", "cancel", "change grievance", "modify"]
+  },
+  {
+    "id": "kb011",
+    "category": "Privacy",
+    "question": "Is my grievance confidential?",
+    "answer": "Yes. Grievance details are only visible to you and authorized admin staff handling your case. Your identity is not shared publicly, and sensitive complaints (e.g., harassment) are routed to a restricted-access queue.",
+    "keywords": ["confidential", "privacy", "anonymous", "who can see"]
+  },
+  {
+    "id": "kb012",
+    "category": "Account",
+    "question": "Do I need to log in to submit a grievance?",
+    "answer": "Yes, you need to log in with your GBU student credentials so the system can verify your identity and link the grievance to your academic record for accurate follow-up. This also prevents spam submissions.",
+    "keywords": ["login required", "sign in", "do i need account"]
+  },
+  {
+    "id": "kb013",
+    "category": "Support",
+    "question": "Who do I contact for urgent issues?",
+    "answer": "For urgent or safety-related issues, please contact the IT Cell / Grievance Redressal Committee directly through the official university helpdesk rather than waiting for the standard grievance workflow, since this chatbot handles routine queries and status tracking.",
+    "keywords": ["urgent", "emergency", "contact", "helpdesk", "phone number"]
+  },
+  {
+    "id": "kb014",
+    "category": "Technical",
+    "question": "The portal is not loading or showing an error, what do I do?",
+    "answer": "Try clearing your browser cache or switching browsers first. If the issue persists, you can report it here as an 'IT/Portal' category grievance and our team will investigate. Include a screenshot on the web form if possible.",
+    "keywords": ["portal not working", "error", "site down", "bug", "not loading"]
+  },
+  {
+    "id": "kb015",
+    "category": "Fee",
+    "question": "I was charged incorrectly, how do I raise a fee grievance?",
+    "answer": "File a grievance under the 'Fee' category with your transaction ID, amount, and date of payment. The finance office typically reviews fee-related grievances within 5 working days and refunds are processed after verification.",
+    "keywords": ["fee issue", "wrong charge", "refund", "payment problem", "double payment"]
+  }
+]
