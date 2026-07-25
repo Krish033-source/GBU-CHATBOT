@@ -1,12 +1,3 @@
-"""
-database.py
-------------
-Minimal SQLite persistence layer for grievance tickets, so the chatbot's
-"submit" and "track" actions are backed by real stored data rather than
-mocked responses. In the full team system (Web Dev & Support role), this
-would be the same tickets table the admin dashboard reads from.
-"""
-
 import sqlite3
 import os
 import random
@@ -17,12 +8,10 @@ import emailer
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "data", "grievances.db")
 
-
 def get_connection():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
-
 
 def init_db():
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
@@ -52,7 +41,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-
 def _generate_ticket_id(conn):
     year = datetime.now().year
     while True:
@@ -63,7 +51,6 @@ def _generate_ticket_id(conn):
         ).fetchone()
         if not exists:
             return ticket_id
-
 
 def create_ticket(name: str, email: str, category: str, description: str) -> str:
     conn = get_connection()
@@ -82,7 +69,6 @@ def create_ticket(name: str, email: str, category: str, description: str) -> str
     conn.close()
     return ticket_id
 
-
 def get_ticket(ticket_id: str):
     conn = get_connection()
     row = conn.execute(
@@ -90,7 +76,6 @@ def get_ticket(ticket_id: str):
     ).fetchone()
     conn.close()
     return dict(row) if row else None
-
 
 def update_status(ticket_id: str, status: str) -> bool:
     conn = get_connection()
@@ -112,24 +97,14 @@ def update_status(ticket_id: str, status: str) -> bool:
     conn.close()
     return updated
 
-
 def _log_notification(conn, ticket_id, email, event, **template_fields):
-    """
-    Sends the real email via emailer.send_email() (SMTP) when SMTP_HOST /
-    SMTP_USER / SMTP_PASSWORD are configured as environment variables, and
-    always records the attempt in the notifications table regardless of
-    whether delivery succeeded -- so "Email Notification (Mandatory)" is
-    demonstrably wired end-to-end, and gracefully degrades to log-only when
-    no mail server is configured (e.g. during local screening demo).
-    """
     delivered = emailer.send_email(event, email, ticket_id=ticket_id, **template_fields)
     now = datetime.now().isoformat(timespec="seconds")
     conn.execute(
         "INSERT INTO notifications (ticket_id, email, event, sent_at, delivered) VALUES (?, ?, ?, ?, ?)",
         (ticket_id, email, event, now, int(delivered)),
     )
-
-
+    
 def list_notifications_for(ticket_id: str):
     conn = get_connection()
     rows = conn.execute(
