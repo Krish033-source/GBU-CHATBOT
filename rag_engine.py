@@ -128,7 +128,7 @@ def generate_answer(query: str, retrieved: list) -> dict:
 
     if llm_answer:
         answer = llm_answer
-    else:.
+    else:
         answer = best["answer"]
         if len(retrieved) > 1 and retrieved[1]["score"] >= SIMILARITY_THRESHOLD:
             answer += f"\n\nRelated: {retrieved[1]['answer']}"
