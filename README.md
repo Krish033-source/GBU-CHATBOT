@@ -6,7 +6,7 @@
 
 ---
 
-** 🔗Live Link:** https://gbu-chatbot.onrender.com/
+🔗** Live Link:** https://gbu-chatbot.onrender.com/
 
 ## 1. Objective
 
