@@ -1,14 +1,13 @@
 import os
-import smtplib
-from email.mime.text import MIMEText
+import requests
 
-SMTP_HOST = os.environ.get("SMTP_HOST")
-SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
-SMTP_USER = os.environ.get("SMTP_USER")
-SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
+BREVO_SENDER_EMAIL = os.environ.get("BREVO_SENDER_EMAIL")
 FROM_NAME = os.environ.get("FROM_NAME", "GBU Grievance Cell")
 
-IS_CONFIGURED = bool(SMTP_HOST and SMTP_USER and SMTP_PASSWORD)
+BREVO_ENDPOINT = "https://api.brevo.com/v3/smtp/email"
+
+IS_CONFIGURED = bool(BREVO_API_KEY and BREVO_SENDER_EMAIL)
 
 TEMPLATES = {
     "Grievance Submitted": {
@@ -46,15 +45,19 @@ def send_email(event: str, to_email: str, **fields) -> bool:
         subject = template["subject"].format(**fields)
         body = template["body"].format(**fields)
 
-        msg = MIMEText(body)
-        msg["Subject"] = subject
-        msg["From"] = f"{FROM_NAME} <{SMTP_USER}>"
-        msg["To"] = to_email
+        payload = {
+            "sender": {"name": FROM_NAME, "email": BREVO_SENDER_EMAIL},
+            "to": [{"email": to_email}],
+            "subject": subject,
+            "textContent": body,
+        }
+        headers = {
+            "api-key": BREVO_API_KEY,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        }
 
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=10) as server:
-            server.starttls()
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            server.sendmail(SMTP_USER, [to_email], msg.as_string())
-        return True
+        resp = requests.post(BREVO_ENDPOINT, json=payload, headers=headers, timeout=10)
+        return resp.status_code in (200, 201)
     except Exception:
         return False
